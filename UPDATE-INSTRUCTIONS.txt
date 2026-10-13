@@ -1,0 +1,101 @@
+UPDATE YOUR OFFICE APP TO CATHEDRA FSDP 0.5.18
+Updated instructions: 13 October 2026
+
+Do these steps on your OFFICE PC. The update keeps the database already on that PC, including the newest scholars and your existing accounts.
+
+You will use TWO different folders:
+  NEW update folder: Cathedra-FSDP-0.5.18-Update, transferred from your drive.
+  EXISTING Office app folder: the app you already use, containing Cathedra FSDP.exe and data\cathedra.db.
+
+1. COPY THE COMPLETE UPDATE FOLDER
+
+On the Office PC, copy the complete Cathedra-FSDP-0.5.18-Update folder from your transfer drive to the Desktop. Keep all its contents, including _internal, tools and docs. If it is a ZIP, extract it first.
+
+Keep this new folder separate from the existing app. Do not paste its contents over the existing app manually.
+
+2. MAKE A BACKUP OF YOUR CURRENT OFFICE RECORDS
+
+Open the Office app you normally use and confirm your newest scholars are there.
+Sign in as an administrator. Open Backup & Export > Create Backup.
+Choose the newest backup and click Download Selected Backup.
+Keep that downloaded backup privately outside the app folder.
+Note the scholar total and a couple of recent additions so you can check them afterward.
+
+3. FIND THE EXISTING OFFICE APP FOLDER
+
+If you use a desktop shortcut, right-click it, open Properties and click Open File Location.
+The existing app folder should contain Cathedra FSDP.exe and a data folder.
+Inside data, confirm cathedra.db exists. Windows may hide the .db extension.
+Choose the app folder ABOVE data, not the data folder itself.
+Click File Explorer's address bar to see and copy the full folder address.
+
+4. EXIT CATHEDRA
+
+Save any edits. Click Exit Cathedra inside the app and confirm.
+Wait until it says Cathedra has stopped, then close the window.
+
+5. RUN THE UPDATE
+
+Press Windows + R, type powershell, and press Enter.
+Copy the WHOLE block below, including & { and the final }, paste it into PowerShell, and press Enter:
+
+& {
+    $updateFolder = (Read-Host 'Paste the NEW Cathedra-FSDP-0.5.18-Update folder address').Trim().Trim('"')
+    $officeFolder = (Read-Host 'Paste the EXISTING Office app folder address').Trim().Trim('"')
+    if (-not (Test-Path -LiteralPath (Join-Path $updateFolder 'tools\update-office.ps1') -PathType Leaf)) { throw 'The NEW folder must contain tools\update-office.ps1. Select the extracted update folder.' }
+    if (-not (Test-Path -LiteralPath (Join-Path $officeFolder 'data\cathedra.db') -PathType Leaf)) { throw 'The EXISTING folder must contain data\cathedra.db. Select the folder containing your current Office app.' }
+    powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $updateFolder 'tools\update-office.ps1') -Installation $officeFolder
+}
+
+First prompt: paste the NEW update folder's full address from File Explorer and press Enter.
+Second prompt: paste the EXISTING Office app folder's full address and press Enter.
+Use folder addresses, without adding Cathedra FSDP.exe or a database filename.
+These prompts work regardless of the transfer drive letter or Office installation location.
+
+Let the update finish. Successful output includes:
+  "status": "verified"
+  "version": "0.5.18"
+  "database_replaced": false
+
+The updater checks the package, makes a protected backup, rehearses migration on a private copy and retains the old application files. Runtime replacement keeps the existing working database unchanged. No Python or Node installation is needed.
+
+6. REOPEN THE ORIGINAL OFFICE APP AND CHECK YOUR RECORDS
+
+Open the app through your usual shortcut, or run Cathedra FSDP.exe from the EXISTING Office app folder. Do not start a separate new installation from the update folder.
+Allow first startup to finish any protected migration required by your older installation. Version 0.5.18 keeps schema 13 unchanged.
+Confirm the app shows version 0.5.18.
+Check the scholar total and the recent additions you noted before updating.
+Check existing accounts, profile remarks and annual grants.
+The former Graduated outcome is now labelled Completed; Open/Closed is separate.
+Open Office log to confirm it remains available.
+Export a scholar with multiple grants. The first row should show that scholar and the first grant; each following row should show the next grant with the repeated profile cells left empty. The next named row starts the next scholar.
+Read each grant's dates, academic years, outcome, case status and remarks across its own row. Keep continuation rows with their named scholar if you sort or filter the spreadsheet.
+Keep your backups and recovery files until these checks pass.
+
+YOUR OFFICE DATABASE
+
+The newest Office records stay in the EXISTING app's data\cathedra.db.
+This package contains no working development or Office database.
+The empty seed under _internal\backend is only for a new installation.
+Do not copy a development data folder or replace Office data\cathedra.db manually.
+
+IF SOMETHING FAILS
+
+Missing database: select the existing app folder containing data\cathedra.db, not the update folder or data subfolder.
+Active app: use Exit Cathedra inside the app, wait for it to stop, then retry.
+Already current: open the existing app and confirm 0.5.18; do not force a reinstall.
+Any other error: keep the full PowerShell message and any receipt path it prints. Keep the data, backups and recovery files; review the error before attempting recovery. Do not restore an older database just to replace application files.
+
+MORE INFORMATION
+
+docs\OFFICE_GUIDE.md contains the same walkthrough and recovery details.
+docs\VALIDATION_0.5.18.md records 390 backend and 185 frontend tests, packaged checks and the synthetic 0.5.17-to-0.5.18 upgrade rehearsal. Actual Office-PC checks must be completed on your Office machine.
+
+CSV FILES
+
+Scholar-directory, Dashboard report detail and contract follow-up CSV exports contain one grant per row. Profile information appears only on the first row for each scholar. Subsequent rows with empty profile cells belong to that scholar. The next named row begins another scholar. Optional empty grant fields mean no value was recorded. No blank separator row is added.
+
+Profile Remarks and grant Remarks stay in separate columns. In Dashboard CSV, find the scholar/grant detail header after the totals and follow-up sections. Education and Office Log CSV files retain their own one-entry-per-row layouts. See docs\EXPORT_SCHEMAS.md for the ordered columns.
+
+CSV files are reports, not recovery backups. Keep the database backup for recovery and store both privately.
+
