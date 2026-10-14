@@ -2,33 +2,29 @@
 
 Download the ready-to-run Windows application from **[the latest release](https://github.com/sebas011/Cathedra-FSDP/releases/latest)**.
 
-## Download the Office update
+## Download and update
 
 1. Sign in to GitHub with an account that has access to this private repository.
-2. Open **Releases**, then the latest Cathedra FSDP Office update.
-3. Under **Assets**, download **Cathedra-FSDP-0.5.18-Update.zip**. Extract the ZIP completely.
-4. Open **UPDATE-INSTRUCTIONS.txt** inside the extracted **Cathedra-FSDP-0.5.18-Update** folder.
+2. Open Releases, then the latest Cathedra FSDP Office update.
+3. Under Assets, download **Cathedra-FSDP-0.5.19-Update.zip** and extract the ZIP completely.
+4. Open **UPDATE-INSTRUCTIONS.txt** in the extracted folder. Make and download a backup in your usual Office app, save your edits and use Exit Cathedra.
+5. Follow the two-folder prompts: the NEW folder is the extracted download; the EXISTING folder is your original app containing Cathedra FSDP.exe and data/cathedra.db.
+6. Successful output includes `status: verified`, `version: 0.5.19` and `database_replaced: false`. Reopen the **original Office app** through your usual shortcut and check its version, scholar total and newest records.
 
-GitHub's **Code > Download ZIP** and the automatically generated **Source code** links contain this repository's delivery documentation. Download the named application ZIP under **Release Assets** to obtain the app.
+For the supplied ASUS Office folder, the ZIP also contains **docs/OFFICE_RETRY_0.5.19.txt**, with the original installation path and a concise retry command. Choose the actual extracted folder containing **tools** if Windows adds a second nested folder.
 
-## Update your existing Office app
+GitHub's Code > Download ZIP and automatic Source code links contain delivery documentation. Download the named application ZIP under Release Assets to obtain the app.
 
-The Office database already on your Office PC stays authoritative. This download contains application files and an intentional empty installation seed; it contains no working scholar database, account records or backups. Do not replace the Office app's `data/cathedra.db` with files from your development PC.
+The existing Office database stays authoritative. This download contains application files and an intentional empty installation seed, with no working scholar database, account records or backups. Do not copy a development data folder or replace the Office data/cathedra.db. Python and Node are not required.
 
-1. Open your usual Office app and make a backup through **Backup & Export**. Download the backup and keep it outside the app folder.
-2. Save your edits and use **Exit Cathedra**. Wait for the app to stop.
-3. Follow the included updater instructions. The **NEW update folder** is the extracted download. The **EXISTING Office app folder** is the folder you already use, containing **Cathedra FSDP.exe** and **data/cathedra.db**. These are two different folders.
-4. Successful updater output includes `status: verified`, `version: 0.5.18` and `database_replaced: false`.
-5. Reopen the **original Office app** through your usual shortcut. Confirm version 0.5.18, your scholar total and the newest records.
+The updater verifies the package, takes a protected snapshot, rehearses any required migration on a private copy, retains the old runtime and preserves the working database during replacement. Read [the full update walkthrough](UPDATE-INSTRUCTIONS.txt).
 
-The updater takes a protected snapshot, rehearses any required migration on a private copy, preserves the current database during application replacement and retains the previous application for recovery. Python and Node are not required on the Office PC.
+## Version 0.5.19
 
-See [the full update walkthrough](UPDATE-INSTRUCTIONS.txt). Download the complete release asset rather than individual executable files. Future prepared updates will be listed on the same Releases page.
+Windows runtime inventory verification now handles case-insensitive tool enumeration and separates the required direct tool files from extra nested tool documents or copies, with clearer package/path diagnostics. The required runtime files remain the same. A preflight failure can occur before an update-state journal is created. Keep the full traceback and recovery files; never delete/reset journals or blindly restore an older database.
 
-## Version 0.5.18
+When all required old runtime files pass their hash checks, the updater archives unlisted application leftovers separately under data/updates and retains a strictly verified old runtime before replacement. Its receipt identifies the residue archive and any repaired files. It does not assume filenames or ignore missing/corrupted required files, links or unreadable files.
 
-CSV exports group each scholar's grants on consecutive rows: profile information appears on the first row, with one grant per row afterward. Each grant retains its dates, status, case and remarks. Source/import/legacy export columns are removed. Schema 13 remains unchanged.
+Schema 13 and the one-grant-per-row CSV layout remain unchanged. Local verification passed **420 backend and 185 frontend tests**, production packaging, the 147-file runtime manifest and a synthetic data-preserving version18-to-version19 upgrade. Complete actual Office-PC acceptance after updating.
 
-Local verification passed **390 backend and 185 frontend tests**, production packaging, the 147-file runtime manifest and a synthetic 0.5.17-to-0.5.18 data-preserving upgrade. Actual Office-PC acceptance should be checked after updating.
-
-**SHA256SUMS.txt** records the SHA-256 checksum of the release ZIP. Only delivery instructions and checksums are stored in this repository; working records and the development checkout are not uploaded.
+SHA256SUMS.txt records the release ZIP checksum. This repository contains only delivery instructions and checksums; working records and the development checkout are not uploaded. Older Releases and their assets are retained.

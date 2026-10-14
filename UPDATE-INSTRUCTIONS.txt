@@ -1,15 +1,15 @@
-UPDATE YOUR OFFICE APP TO CATHEDRA FSDP 0.5.18
-Updated instructions: 13 October 2026
+UPDATE YOUR OFFICE APP TO CATHEDRA FSDP 0.5.19
+Updated instructions: 14 October 2026
 
 Do these steps on your OFFICE PC. The update keeps the database already on that PC, including the newest scholars and your existing accounts.
 
 You will use TWO different folders:
-  NEW update folder: Cathedra-FSDP-0.5.18-Update, transferred from your drive.
+  NEW update folder: Cathedra-FSDP-0.5.19-Update, transferred from your drive.
   EXISTING Office app folder: the app you already use, containing Cathedra FSDP.exe and data\cathedra.db.
 
 1. COPY THE COMPLETE UPDATE FOLDER
 
-On the Office PC, copy the complete Cathedra-FSDP-0.5.18-Update folder from your transfer drive to the Desktop. Keep all its contents, including _internal, tools and docs. If it is a ZIP, extract it first.
+On the Office PC, copy the complete Cathedra-FSDP-0.5.19-Update folder from your transfer drive to the Desktop. Keep all its contents, including _internal, tools and docs. If it is a ZIP, extract it first.
 
 Keep this new folder separate from the existing app. Do not paste its contents over the existing app manually.
 
@@ -40,7 +40,7 @@ Press Windows + R, type powershell, and press Enter.
 Copy the WHOLE block below, including & { and the final }, paste it into PowerShell, and press Enter:
 
 & {
-    $updateFolder = (Read-Host 'Paste the NEW Cathedra-FSDP-0.5.18-Update folder address').Trim().Trim('"')
+    $updateFolder = (Read-Host 'Paste the NEW Cathedra-FSDP-0.5.19-Update folder address').Trim().Trim('"')
     $officeFolder = (Read-Host 'Paste the EXISTING Office app folder address').Trim().Trim('"')
     if (-not (Test-Path -LiteralPath (Join-Path $updateFolder 'tools\update-office.ps1') -PathType Leaf)) { throw 'The NEW folder must contain tools\update-office.ps1. Select the extracted update folder.' }
     if (-not (Test-Path -LiteralPath (Join-Path $officeFolder 'data\cathedra.db') -PathType Leaf)) { throw 'The EXISTING folder must contain data\cathedra.db. Select the folder containing your current Office app.' }
@@ -54,7 +54,7 @@ These prompts work regardless of the transfer drive letter or Office installatio
 
 Let the update finish. Successful output includes:
   "status": "verified"
-  "version": "0.5.18"
+  "version": "0.5.19"
   "database_replaced": false
 
 The updater checks the package, makes a protected backup, rehearses migration on a private copy and retains the old application files. Runtime replacement keeps the existing working database unchanged. No Python or Node installation is needed.
@@ -62,8 +62,8 @@ The updater checks the package, makes a protected backup, rehearses migration on
 6. REOPEN THE ORIGINAL OFFICE APP AND CHECK YOUR RECORDS
 
 Open the app through your usual shortcut, or run Cathedra FSDP.exe from the EXISTING Office app folder. Do not start a separate new installation from the update folder.
-Allow first startup to finish any protected migration required by your older installation. Version 0.5.18 keeps schema 13 unchanged.
-Confirm the app shows version 0.5.18.
+Allow first startup to finish any protected migration required by your older installation. Version 0.5.19 keeps schema 13 unchanged.
+Confirm the app shows version 0.5.19.
 Check the scholar total and the recent additions you noted before updating.
 Check existing accounts, profile remarks and annual grants.
 The former Graduated outcome is now labelled Completed; Open/Closed is separate.
@@ -83,13 +83,17 @@ IF SOMETHING FAILS
 
 Missing database: select the existing app folder containing data\cathedra.db, not the update folder or data subfolder.
 Active app: use Exit Cathedra inside the app, wait for it to stop, then retry.
-Already current: open the existing app and confirm 0.5.18; do not force a reinstall.
-Any other error: keep the full PowerShell message and any receipt path it prints. Keep the data, backups and recovery files; review the error before attempting recovery. Do not restore an older database just to replace application files.
+Already current: open the existing app and confirm 0.5.19; do not force a reinstall.
+Inventory preflight error: the updater may stop before writing an update-state journal. An incoming-package check can fail before it reads or changes the Office installation. Do not create, delete or reset any journal to make it continue. Keep the complete error text and full traceback, including any receipt path, so the failed incoming or installed-package check can be identified.
+
+The runtime verifier now reports the package folder it checked and the specific missing or unexpected runtime path. A case spelling difference on Windows or a tool nested under tools can explain some inventory differences; do not assume that is the cause of every error.
+
+Any other error: keep the full PowerShell message, traceback and any receipt path it prints. Keep the database, data folder, backups, update-state journal and recovery files. Review the error before retrying or attempting recovery. Never delete/reset journals, replace cathedra.db, or blindly restore an older database just to replace application files.
 
 MORE INFORMATION
 
 docs\OFFICE_GUIDE.md contains the same walkthrough and recovery details.
-docs\VALIDATION_0.5.18.md records 390 backend and 185 frontend tests, packaged checks and the synthetic 0.5.17-to-0.5.18 upgrade rehearsal. Actual Office-PC checks must be completed on your Office machine.
+docs\VALIDATION_0.5.19.md records 420 backend and 185 frontend tests, packaged checks and the synthetic 0.5.18-to-0.5.19 upgrade rehearsal. Actual Office-PC checks must be completed on your Office machine.
 
 CSV FILES
 
@@ -98,4 +102,18 @@ Scholar-directory, Dashboard report detail and contract follow-up CSV exports co
 Profile Remarks and grant Remarks stay in separate columns. In Dashboard CSV, find the scholar/grant detail header after the totals and follow-up sections. Education and Office Log CSV files retain their own one-entry-per-row layouts. See docs\EXPORT_SCHEMAS.md for the ordered columns.
 
 CSV files are reports, not recovery backups. Keep the database backup for recovery and store both privately.
+
+VERSION 0.5.19
+
+This release corrects Windows runtime inventory checks, including case-insensitive tool enumeration and separating the required direct tool files from extra nested tool documents or copies. The required runtime files remain the same. Schema 13 and the grant-per-row CSV layout remain unchanged. Existing Office records and accounts must remain in the original installation.
+
+If a previous attempt reported an inventory failure, retain the original installation and the complete error first. Use the supplied version 0.5.19 verifier to check the new package; an actual interrupted replacement requires reviewed recovery rather than deleting its journal. Follow any reviewed machine-specific retry instructions in the release notes only when they apply to your failed attempt.
+
+RETRY AFTER THE REPORTED OFFICE INVENTORY FAILURE
+
+The supplied traceback identifies the existing Office installation check, before the prior attempt created a snapshot, wrote its update-state journal or replaced application files. That failed check itself does not require automatic rollback. A separate unfinished update-state journal, if one already exists, still requires reviewed recovery; never delete or reset it.
+
+Version 0.5.19 can safely handle unlisted application leftovers when every required old runtime file still matches its manifest. It archives unlisted files from _internal and tools separately under data\updates, creates a strictly verified old-runtime recovery archive from the required files, then installs the verified incoming runtime. The receipt identifies runtime_residue_archive, runtime_residue_files and existing_runtime_residue_repaired. The actual extra filenames in your Office installation are not assumed; diagnostics and the receipt identify them when present.
+
+Do not delete extra files manually or restore an older database to clear this error. Missing or corrupted required files, linked paths and unreadable files still stop the update safely. With the Office app closed and no unfinished journal, use the ordinary two-folder update steps above with the complete new 0.5.19 package. Keep the recovery archive and check your newest scholars after success.
 
