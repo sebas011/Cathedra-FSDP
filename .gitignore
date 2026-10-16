@@ -1,6 +1,8 @@
 *.zip
+*.exe
+_internal/
 data/
 *.db
 *.db-wal
 *.db-shm
-.env
+backups/
