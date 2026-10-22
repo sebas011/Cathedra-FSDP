@@ -1,8 +1,8 @@
-Cathedra FSDP 0.5.21 — updating an existing Office installation
+Cathedra FSDP 0.5.23 — updating an existing Office installation
 
 This package updates the app. Keep the existing Office data\cathedra.db containing your newest records.
 
-1. In your existing Office app, create a backup in Backups & Export. Keep a copy outside the app folder.
+1. In your existing Office app, create a backup in Backup & Export. Keep a copy outside the app folder.
 2. Save any edits and exit Cathedra using its normal exit control.
 3. Extract the whole update package to a new folder. Do not copy its files over the existing app manually.
 4. Locate the extracted folder that directly contains Cathedra FSDP.exe, _internal and tools. Extract All can create an extra nested folder.
@@ -12,17 +12,23 @@ $updateFolder = Read-Host 'Full path of the NEW extracted update folder containi
 $installationFolder = Read-Host 'Full path of the EXISTING Office app folder containing data\cathedra.db'
 & (Join-Path $updateFolder 'tools\update-office.ps1') -Installation $installationFolder -Package $updateFolder
 
-For the ASUS Office PC, the EXISTING installation previously reported was:
-C:\Users\ASUS\AppData\Local\Cathedra-FSDP
+Example EXISTING installation (use the folder containing your own newest data\cathedra.db):
+C:\Users\<your Windows user>\AppData\Local\Cathedra-FSDP
 
-6. Wait for a verified update result showing version 0.5.21 and database_replaced: false.
-7. Reopen the ORIGINAL installation using your usual shortcut. Its first launch safely adds the optional schema-14 fields after a protected snapshot. Check your newest scholars and grant history.
+6. Wait for a verified update result showing version 0.5.23 and database_replaced: false.
+7. Reopen the ORIGINAL installation using your usual shortcut. Schema 16 is unchanged from 0.5.22; older installations receive the required additive upgrades after a protected snapshot. Check your newest scholars and grant history.
 
 Do not replace the Office data folder with a development database or a clean installation seed. The updater preserves your records, rehearses migration on a private copy and keeps recovery files.
 
 If an error appears, keep its complete message and receipt path. Preserve data, backups and update journals for diagnosis. Do not delete recovery state or manually replace the database.
 
-In this version: compact Office Log entries that close after saving; independent hard-copy/soft-copy availability; separate repeated program applications and annual entries; application-specific completion/payback; Degree/Certification/Enhancement categories; normalized alphabetical directory order.
+New in 0.5.23: the Google reporting tab contains only the requested 15 columns, one grant per row, full education background and labeled profile/grant remarks. Follow GOOGLE_SHEETS_SETUP.md for detailed account setup and access troubleshooting.
 
-Automated release validation: 494 backend tests and 220 frontend tests. Intended Office-PC acceptance remains separate.
+Also included since the previous GitHub 0.5.21 release: literal calendar years such as 2021; cursor-safe text editing; Incomplete grants; optional program start, allowed years and exact completion deadlines; a three-year grace period after the allowed deadline; separate Unpaid/Partially paid/Fully paid repayment progress; and manual Google Sheets reporting after one-time setup. Annual funding copies retain the program deadline in the same application, while new applications start separately.
+
+Automated release validation: 586 backend tests and 245 frontend tests. Intended Office-PC acceptance remains separate.
+
+GOOGLE REPORTING
+Configure Google Sheets reporting in Backup & Export after updating. Follow docs\GOOGLE_SHEETS_SETUP.md. The update keeps existing Office records and its local Google connection file. Do not copy a development data folder or Google connection file onto the Office PC.
+
 

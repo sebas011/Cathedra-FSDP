@@ -1,17 +1,25 @@
 # Cathedra FSDP — Office updates
 
-Current download: **0.5.21**. Use the application ZIP under [Latest release](https://github.com/sebas011/Cathedra-FSDP/releases/latest).
+Current download: **0.5.23**. Download **Cathedra-FSDP-0.5.23-Update.zip** under Assets on the [latest release](https://github.com/sebas011/Cathedra-FSDP/releases/latest). GitHub's Source code ZIP is for development.
 
-1. Download **Cathedra-FSDP-0.5.21-Update.zip** under Assets, not GitHub's Source code ZIP.
+## Update your existing Office installation
+
+1. Download the application ZIP and compare its checksum with SHA256SUMS.txt before extraction.
 2. Extract All into a new update folder. Close the installed Cathedra app normally.
-3. Open UPDATE-INSTRUCTIONS.txt. Use the supplied updater against the existing Office installation folder containing Cathedra FSDP.exe and data.
-4. Keep the existing **data/cathedra.db**. Never overwrite it with a development database or a clean installation seed.
-5. Open the original Office installation and confirm version0.5.21 and your newest records.
+3. Follow [UPDATE-INSTRUCTIONS.txt](UPDATE-INSTRUCTIONS.txt), selecting the existing installation containing Cathedra FSDP.exe and data as the target.
+4. Preserve the Office **data/cathedra.db**. Never replace it with a development database or the empty installation seed.
+5. Open the original Office installation, confirm version 0.5.23 and check the newest scholar records.
 
-The update includes independent paper/electronic-copy choices, separate repeated grant applications, Certification/Enhancement categories, alphabetical scholars, clearer Office Log entries, Excel-readable CSVs, safer recovery copies, private error references and inactivity locking. Transferred and Withdrawn remain eligible for calculated payback review.
+## Google Sheets reporting
 
-The ZIP contains the tested Windows app and an intentionally empty installation seed, with no working records, accounts, backups or private installation receipts. No separate Python/Node installation is needed on the Office PC. Compare the downloaded ZIP with SHA256SUMS.txt using Windows Get-FileHash before extraction. This is an unsigned internal build; checksums verify integrity, not publisher identity.
+Use the [detailed Google Sheets setup guide](docs/GOOGLE_SHEETS_SETUP.md). It covers creating the Cloud project, enabling the Sheets API, Desktop credentials, approved test users, spreadsheet sharing, the app connection and troubleshooting.
 
-[Detailed update steps](UPDATE-INSTRUCTIONS.txt) · [Release notes and downloads](https://github.com/sebas011/Cathedra-FSDP/releases/tag/v0.5.21) · [Source code](https://github.com/sebas011/Cathedra-FSDP-source-code)
+The reporting tab contains only No., Name, Age, Tenure, Department, Rank/position, Previous degree, Program, Delivering HEI, Grant type, Date started, Date ended, Extension, Status and Remarks. It keeps one grant per row and profile details on the scholar's first row. Other tabs and the local database remain unchanged. Configure and sign in separately on the Office PC: local Google credentials and connections are excluded from downloads.
 
-Local verification:714 unique automated cases across complete and focused runs, packaged workflow and synthetic Windows PowerShell5.1 upgrade/recovery. Actual Office-PC acceptance and remote CI results are separate evidence. Previous releases remain available for reviewed recovery; do not run an older application on a newly migrated database.
+This release also includes the 0.5.22 improvements since the previous GitHub download: single-year periods, Incomplete grant status, repayment progress, optional completion deadlines and allowed duration, the three-year grace calculation, and the multiline typing fix. CSV exports retain their full-detail layout.
+
+The ZIP contains the Windows application and an intentionally empty schema 16 seed. It contains no working scholar records, accounts, backups, OAuth credentials, tokens or private installation receipts. The Office PC needs no separate Python/Node installation. This is an unsigned internal build; checksums verify integrity, not publisher identity.
+
+Validation: 586 backend cases and 245 frontend tests, plus the packaged release gates recorded with the release. Intended Office-PC acceptance remains a separate check. Previous releases are preserved for reviewed recovery; do not run an older application against a newly migrated database.
+
+[Release notes and downloads](https://github.com/sebas011/Cathedra-FSDP/releases/tag/v0.5.23) · [Source code](https://github.com/sebas011/Cathedra-FSDP-source-code)
