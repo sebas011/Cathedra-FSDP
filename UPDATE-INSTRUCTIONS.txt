@@ -1,4 +1,4 @@
-Cathedra FSDP 0.5.23 — updating an existing Office installation
+Cathedra FSDP 0.5.24 — updating an existing Office installation
 
 This package updates the app. Keep the existing Office data\cathedra.db containing your newest records.
 
@@ -15,20 +15,18 @@ $installationFolder = Read-Host 'Full path of the EXISTING Office app folder con
 Example EXISTING installation (use the folder containing your own newest data\cathedra.db):
 C:\Users\<your Windows user>\AppData\Local\Cathedra-FSDP
 
-6. Wait for a verified update result showing version 0.5.23 and database_replaced: false.
+6. Wait for a verified update result showing version 0.5.24 and database_replaced: false.
 7. Reopen the ORIGINAL installation using your usual shortcut. Schema 16 is unchanged from 0.5.22; older installations receive the required additive upgrades after a protected snapshot. Check your newest scholars and grant history.
 
 Do not replace the Office data folder with a development database or a clean installation seed. The updater preserves your records, rehearses migration on a private copy and keeps recovery files.
 
 If an error appears, keep its complete message and receipt path. Preserve data, backups and update journals for diagnosis. Do not delete recovery state or manually replace the database.
 
-New in 0.5.23: the Google reporting tab contains only the requested 15 columns, one grant per row, full education background and labeled profile/grant remarks. Follow GOOGLE_SHEETS_SETUP.md for detailed account setup and access troubleshooting.
+New in 0.5.24: Paper & Ink Scholar Office redesign, clearer scholar profiles and a four-step editor, real registration analytics and mixed charts. Continue moves to Review without saving; use Save Scholar for the final complete save. Existing Google reporting retains its 15 columns and one grant per row. Follow GOOGLE_SHEETS_SETUP.md for detailed account setup and access troubleshooting.
 
-Also included since the previous GitHub 0.5.21 release: literal calendar years such as 2021; cursor-safe text editing; Incomplete grants; optional program start, allowed years and exact completion deadlines; a three-year grace period after the allowed deadline; separate Unpaid/Partially paid/Fully paid repayment progress; and manual Google Sheets reporting after one-time setup. Annual funding copies retain the program deadline in the same application, while new applications start separately.
+Also retained from recent releases: literal calendar years such as 2021; cursor-safe text editing; Incomplete grants; optional program start, allowed years and exact completion deadlines; a three-year grace period after the allowed deadline; separate Unpaid/Partially paid/Fully paid repayment progress; and manual Google Sheets reporting after one-time setup. Annual funding copies retain the program deadline in the same application, while new applications start separately.
 
-Automated release validation: 586 backend tests and 245 frontend tests. Intended Office-PC acceptance remains separate.
+Automated release validation: 588 backend tests and 261 frontend tests. Intended Office-PC acceptance remains separate.
 
 GOOGLE REPORTING
 Configure Google Sheets reporting in Backup & Export after updating. Follow docs\GOOGLE_SHEETS_SETUP.md. The update keeps existing Office records and its local Google connection file. Do not copy a development data folder or Google connection file onto the Office PC.
-
-
