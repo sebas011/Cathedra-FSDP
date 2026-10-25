@@ -1,12 +1,15 @@
-Cathedra FSDP 0.5.25 — updating an existing Office installation
+Cathedra FSDP 0.5.26 — updating an existing Office installation
 
-This package updates the app. Keep the existing Office data\cathedra.db containing your newest records.
+This package updates the software. Keep your existing Office data\cathedra.db containing your newest scholars, grants and accounts. Do not replace it with a database from the development PC.
 
-1. In your existing Office app, create a backup in Backup & Export. Keep a copy outside the app folder.
-2. Save any edits and exit Cathedra using its normal exit control.
-3. Extract the whole update package to a new folder. Do not copy its files over the existing app manually.
-4. Locate the extracted folder that directly contains Cathedra FSDP.exe, _internal and tools. Extract All can create an extra nested folder.
-5. Open PowerShell, paste these three lines, then answer the two folder prompts. Enter folder paths without surrounding quotation marks.
+BEFORE UPDATING
+1. Open your existing Office app and create a backup in Backup & Export. Keep a copy outside the app folder. Note a few recently added scholars so you can check them after the update.
+2. Save any edits, then exit Cathedra using its normal exit control. Close any other Cathedra windows. Leave the existing app folder and its data folder in place.
+3. Download or copy the entire 0.5.26 update ZIP and use Extract All to extract it to a NEW folder. Do not run from inside the ZIP. Do not manually copy its files over the existing installation.
+4. Find the extracted folder that directly contains Cathedra FSDP.exe, _internal, tools and release-manifest.json. Extract All may create an extra nested folder: choose the inner folder containing these items.
+
+RUN THE UPDATER
+5. Open PowerShell, paste these three lines together, then answer the two folder prompts. Enter complete folder paths without surrounding quotation marks.
 
 $updateFolder = Read-Host 'Full path of the NEW extracted update folder containing Cathedra FSDP.exe'
 $installationFolder = Read-Host 'Full path of the EXISTING Office app folder containing data\cathedra.db'
@@ -15,18 +18,26 @@ $installationFolder = Read-Host 'Full path of the EXISTING Office app folder con
 Example EXISTING installation (use the folder containing your own newest data\cathedra.db):
 C:\Users\<your Windows user>\AppData\Local\Cathedra-FSDP
 
-6. Wait for a verified update result showing version 0.5.25 and database_replaced: false.
-7. Reopen the ORIGINAL installation using your usual shortcut. Schema 16 is unchanged from 0.5.22; older installations receive the required additive upgrades after a protected snapshot. Check your newest scholars and grant history.
+The first prompt is the NEW extracted UPDATE folder. The second prompt is your ORIGINAL Office installation. Do not select its data subfolder and do not select the new update folder for both prompts.
 
-Do not replace the Office data folder with a development database or a clean installation seed. The updater preserves your records, rehearses migration on a private copy and keeps recovery files.
+6. Wait for a verified update result showing version 0.5.26 and database_replaced: false. The updater verifies the package, takes a protected recovery copy, rehearses any needed migration on a private copy and keeps recovery information. Do not interrupt it or delete its recovery folders.
+7. Reopen the ORIGINAL installation using your usual shortcut. On its next normal startup, an older compatible database receives the required protected additive upgrades through schema 17. Schema 17 adds an optional history-details column; it does not replace your scholar records or invent values for old history entries.
+8. Check the recently added scholars, education records, grant histories and latest Office Log entries you noted earlier. Sign in with your existing account. Keep your pre-update backup until you are satisfied with the result.
 
-If an error appears, keep its complete message and receipt path. Preserve data, backups and update journals for diagnosis. Do not delete recovery state or manually replace the database.
+IF AN ERROR APPEARS
+Keep the complete message and receipt path. Preserve the original data folder, backups and update journals for diagnosis. Do not delete recovery state, manually replace cathedra.db, or run a clean-installation seed over the Office data. The extracted package includes a blank seed for new installations; it is not your working Office database.
 
-New in 0.5.25: a larger current-status chart and readable legend; a corrected profile stylesheet order; full-width Education and Programs & grants tabs; visible education details; and Expand all grants / Collapse all grants controls. Records, calculations, Google reporting and schema 16 are unchanged.
+WHAT CHANGED IN 0.5.26
+- Administrators can open a scholar profile, choose Overview, then Change history. Expand View previous and new values on a newly recorded change to compare business values. Older events keep their existing field information. Long text is labeled when its preview is truncated. Passwords, sessions and Google credentials are not included in these comparisons.
+- In Programs & grants, expand an annual grant and use Assessment details under its contract assessment. The dashboard contract follow-up also offers Assessment details. These show the factual reason, deadline basis where available, and assessed-on date. Existing recorded outcomes, separate Open/Closed cases and repayment progress are retained.
+- Business dates use Asia/Manila consistently, including the default Office Log date and contract/grace assessments. Authentication timestamps retain UTC handling; backup and recovery timestamps keep their existing behavior.
 
-Also retained from recent releases: literal calendar years such as 2021; cursor-safe text editing; Incomplete grants; optional program start, allowed years and exact completion deadlines; a three-year grace period after the allowed deadline; separate Unpaid/Partially paid/Fully paid repayment progress; and manual Google Sheets reporting after one-time setup. Annual funding copies retain the program deadline in the same application, while new applications start separately.
+Also retained: the larger current-status chart, readable education/program history, four-step scholar entry, literal calendar years such as 2021, Summer, cursor-safe editing, Incomplete grants, optional dates/deadlines, the three-year grace period after the allowed completion deadline, separate repayment progress and independent applications with annual grant records. Continue moves to Review without saving; use Save Scholar for the final complete save.
 
-Automated release validation: 262 frontend tests and packaged Windows workflow checks. Backend runtime sources are unchanged from the tested 0.5.24 release. Intended Office-PC acceptance remains separate.
+See docs\VALIDATION_0.5.26.md for the actual release checks and remaining device-specific limits. Local validation does not certify the separate Office PC.
 
-GOOGLE REPORTING
-Configure Google Sheets reporting in Backup & Export after updating. Follow docs\GOOGLE_SHEETS_SETUP.md. The update keeps existing Office records and its local Google connection file. Do not copy a development data folder or Google connection file onto the Office PC.
+GOOGLE SHEETS REPORTING
+The update retains the existing installation's local Google connection. If Backup & Export already says Google account connected, keep that connection and confirm the reporting spreadsheet belongs to the intended office workflow. The report keeps its 15 columns, numbers each scholar once and places that scholar's grants on consecutive rows.
+
+For a different PC, Windows account or Google account, follow GOOGLE_SHEETS_SETUP.md (also available under docs) from the beginning. It covers the Google Cloud project, Sheets API, Desktop OAuth JSON, consent/testing users, spreadsheet Editor access, connecting the intended account and sending a report. A test-user entry and spreadsheet sharing are separate requirements. Do not copy the development data folder, Google token or encrypted connection file onto the Office PC. Cathedra manages the CATHEDRA REPORT tab; keep manual spreadsheet work in other tabs.
+
