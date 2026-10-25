@@ -1,1 +1,1 @@
-99215ced2520340f9a7d27cddfe1322b7df8bd3da551bffffcbcaebcc59a918f  Cathedra-FSDP-0.5.24-Update.zip
+01d4cbc788a577057b677bac62605db8d78f5bdb160fbea57746ec91a55965f3  Cathedra-FSDP-0.5.25-Update.zip
